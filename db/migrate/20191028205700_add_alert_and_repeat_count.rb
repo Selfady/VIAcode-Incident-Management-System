@@ -1,4 +1,4 @@
-class AddAlertAndRepeatCount < ActiveRecord::Migration[4.2]
+class AddAlertAndRepeatCount < ActiveRecord::Migration[5.1]
   def up
 
     # return if it's a new setup
@@ -7,7 +7,6 @@ class AddAlertAndRepeatCount < ActiveRecord::Migration[4.2]
     add_column :tickets, :alert, :string, limit: 999, null: true
     add_column :tickets, :repeat_count, :integer, null: true
     
-    UserInfo.current_user_id = 1
     ObjectManager::Attribute.add(
       force:       true,
       object:      'Ticket',
@@ -31,6 +30,8 @@ class AddAlertAndRepeatCount < ActiveRecord::Migration[4.2]
       to_migrate:  false,
       to_delete:   false,
       position:    101,  
+      created_by_id: 1,
+      updated_by_id: 1,
     )
 
     ObjectManager::Attribute.add(
@@ -64,6 +65,8 @@ class AddAlertAndRepeatCount < ActiveRecord::Migration[4.2]
       to_migrate:  false,
       to_delete:   false,
       position:    102,
+      created_by_id: 1,
+      updated_by_id: 1,
     )
     
   end
