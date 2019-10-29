@@ -1,11 +1,8 @@
-class AddAlertAndRepeatCount < ActiveRecord::Migration[4.2]
+class ObjectManagerUpdateTicket < ActiveRecord::Migration[4.2]
   def up
 
     # return if it's a new setup
     return if !Setting.find_by(name: 'system_init_done')
-
-    add_column :tickets, :alert, :string, limit: 999, null: true
-    add_column :tickets, :repeat_count, :integer, null: true
     
     UserInfo.current_user_id = 1
     ObjectManager::Attribute.add(
